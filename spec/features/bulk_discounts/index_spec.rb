@@ -50,10 +50,24 @@ RSpec.describe 'merchants bulk discounts index page', type: :feature do
   it 'shows all of my bulk discounts including their percentage discount and quantity threashold.' do
     expect(page).to have_content("Save 20% when you purchase 10 of the same item.")
     expect(page).to have_content("Save 15% when you purchase 5 of the same item.")
-    expect(page).to have_content("Save 30% when you purchase 20 of one item.")
+    expect(page).to have_content("Save 30% when you purchase 20 of the same item.")
   end
 
   xit 'each bulk discount listed includes a link to its show page' do
+    expect(page).to have_css("#merchant-discount#{@bulk_discount_a.id}")
+    expect(page).to have_css("#merchant-discount#{@bulk_discount_b.id}")
+    expect(page).to have_css("#merchant-discount#{@bulk_discount_c.id}")
+    
+    within "#merchant-discount#{@bulk_discount_a.id}" do
+      expect(page).to have_link("Learn more about this offer!", :href => merchant_bulk_discount(@bulk_discount_a))
+    end
 
+    within "#merchant-discount#{@bulk_discount_b.id}" do
+      expect(page).to have_link("Learn more about this offer!", :href => merchant_bulk_discount(@bulk_discount_b))
+    end
+
+    within "#merchant-discount#{@bulk_discount_c.id}" do
+      expect(page).to have_link("Learn more about this offer!", :href => merchant_bulk_discount(@bulk_discount_c))
+    end
   end
 end
