@@ -78,4 +78,37 @@ RSpec.describe 'merchants bulk discounts index page', type: :feature do
       expect(page).to have_link("Create A New Bulk Discount", :href => new_merchant_bulk_discount_path(@merchant1))
     end
   end
+
+  it 'each bulk discount has a link to delete that discount. when the merchant
+  clicks this link, it redirects back to the bulk discount index page and that
+  discount is not longer listed' do
+    within "#merchant-discount#{@bulk_discount_a.id}" do
+      expect(page).to have_link("Delete This Offer", :href => merchant_bulk_discounts_path(@merchant1))
+    end
+
+    within "#merchant-discount#{@bulk_discount_b.id}" do
+      expect(page).to have_link("Delete This Offer", :href => merchant_bulk_discounts_path(@merchant1))
+    end
+
+    within "#merchant-discount#{@bulk_discount_c.id}" do
+      expect(page).to have_link("Delete This Offer", :href => merchant_bulk_discounts_path(@merchant1))
+    end
+
+    within "#merchant-discount#{@bulk_discount_b.id}" do
+      click_link "Delete This Offer"
+    end
+
+    expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
+    expect(page).to_not have_css("#merchant-discount#{@bulk_discount_b.id}")
+    expect(page).to have_css("#merchant-discount#{@bulk_discount_a.id}")
+    expect(page).to have_css("#merchant-discount#{@bulk_discount_c.id}")
+    
+    within "#merchant-discount#{@bulk_discount_c.id}" do
+      click_link "Delete This Offer"
+    end
+
+    expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
+    expect(page).to_not have_css("#merchant-discount#{@bulk_discount_c.id}")
+    expect(page).to have_css("#merchant-discount#{@bulk_discount_a.id}")
+  end
 end
