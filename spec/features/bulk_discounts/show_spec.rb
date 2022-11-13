@@ -50,6 +50,7 @@ RSpec.describe 'merchants bulk discount show page', type: :feature do
       end
 
       it 'show the bulk discounts quantity threshold and percentage discount' do
+        save_and_open_page
         expect(page).to have_content("Details About Hair Care's 20% Bulk Discount:")
         expect(page).to have_content("Percentage Discount: 20%")
         expect(page).to have_content("Quantity Threshold: 10")
