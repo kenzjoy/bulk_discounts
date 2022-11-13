@@ -4,6 +4,10 @@ RSpec.describe 'merchants bulk discounts index page', type: :feature do
   before :each do
     @merchant1 = Merchant.create!(name: 'Hair Care')
 
+    @bulk_discount_a = BulkDiscount.create!(merchant_id: @merchant1.id, percentage_discount: 20, quantity_threshold: 10)
+    @bulk_discount_b = BulkDiscount.create!(merchant_id: @merchant1.id, percentage_discount: 15, quantity_threshold: 5)
+    @bulk_discount_c = BulkDiscount.create!(merchant_id: @merchant1.id, percentage_discount: 30, quantity_threshold: 20)
+
     @customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Smith')
     @customer_2 = Customer.create!(first_name: 'Cecilia', last_name: 'Jones')
     @customer_3 = Customer.create!(first_name: 'Mariah', last_name: 'Carrey')
@@ -40,6 +44,16 @@ RSpec.describe 'merchants bulk discounts index page', type: :feature do
     @transaction6 = Transaction.create!(credit_card_number: 879799, result: 1, invoice_id: @invoice_7.id)
     @transaction7 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_2.id)
 
-    merchant_bulk_discounts_path(@merchant1)
+    visit merchant_bulk_discounts_path(@merchant1)
+  end
+
+  it 'shows all of my bulk discounts including their percentage discount and quantity threashold.' do
+    expect(page).to have_content("Save 20% when you purchase 10 of the same item.")
+    expect(page).to have_content("Save 15% when you purchase 5 of the same item.")
+    expect(page).to have_content("Save 30% when you purchase 20 of one item.")
+  end
+
+  xit 'each bulk discount listed includes a link to its show page' do
+
   end
 end

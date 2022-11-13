@@ -122,7 +122,6 @@ RSpec.describe 'merchant dashboard' do
   end
 
   it "shows a link to view my discounts. the link brings me to my bulk discounts index page" do
-    # save_and_open_page
     expect(page).to have_link("Bulk Discounts")
 
     click_link("Bulk Discounts", :href => merchant_bulk_discounts_path(@merchant1))
