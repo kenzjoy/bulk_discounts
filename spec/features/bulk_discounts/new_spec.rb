@@ -57,7 +57,9 @@ RSpec.describe 'new merchant bulk discount view page', type: :feature do
 
       xit 'when I fill in the form with valid data, I am redirected
       back to the bulk discount index, and I see my new bulk discount' do 
-
+        fill_in "Percentage Discount", with: 50
+        fill_in "Quantity Threshold", with: 100
+        click_on "Submit", :href => merchant_bulk_discounts_path(@merchant1)
       end
     end
   end
