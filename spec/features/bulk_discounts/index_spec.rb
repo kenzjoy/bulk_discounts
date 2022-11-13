@@ -59,15 +59,15 @@ RSpec.describe 'merchants bulk discounts index page', type: :feature do
     expect(page).to have_css("#merchant-discount#{@bulk_discount_c.id}")
     
     within "#merchant-discount#{@bulk_discount_a.id}" do
-      expect(page).to have_link("Learn more about this offer!", :href => merchant_bulk_discount_path(@bulk_discount_a))
+      expect(page).to have_link("Learn more about this offer!", :href => merchant_bulk_discount_path(@merchant1, @bulk_discount_a))
     end
 
     within "#merchant-discount#{@bulk_discount_b.id}" do
-      expect(page).to have_link("Learn more about this offer!", :href => merchant_bulk_discount_path(@bulk_discount_b))
+      expect(page).to have_link("Learn more about this offer!", :href => merchant_bulk_discount_path(@merchant1, @bulk_discount_b))
     end
 
     within "#merchant-discount#{@bulk_discount_c.id}" do
-      expect(page).to have_link("Learn more about this offer!", :href => merchant_bulk_discount_path(@bulk_discount_c))
+      expect(page).to have_link("Learn more about this offer!", :href => merchant_bulk_discount_path(@merchant1, @bulk_discount_c))
     end
   end
 end

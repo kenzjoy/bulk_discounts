@@ -5,7 +5,7 @@
     <ul>  
       <li>Save <%= discount.percentage_discount %>% when you purchase <%= discount.quantity_threshold %> of the same item.</li>
         <ul>
-          <li><%= link_to "Learn more about this offer!", merchant_bulk_discount_path(discount.id) %></li>
+          <li><%= link_to "Learn more about this offer!", merchant_bulk_discount_path(@merchant.id, discount.id) %></li>
         </ul>
     </ul>
   </div>
