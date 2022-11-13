@@ -46,7 +46,7 @@ RSpec.describe 'new merchant bulk discount view page', type: :feature do
         @transaction6 = Transaction.create!(credit_card_number: 879799, result: 1, invoice_id: @invoice_7.id)
         @transaction7 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_2.id)
 
-        visit new_merchant_bulk_discount_path(@merchant1)
+        visit new_merchant_bulk_discount_path(@merchant1.id)
       end
         
       it 'I see a form to add a new bulk discount' do
@@ -57,8 +57,8 @@ RSpec.describe 'new merchant bulk discount view page', type: :feature do
 
       xit 'when I fill in the form with valid data, I am redirected
       back to the bulk discount index, and I see my new bulk discount' do 
-        fill_in "Percentage Discount", with: 50
-        fill_in "Quantity Threshold", with: 100
+        fill_in :percentage_discount, with: 50
+        fill_in :quantity_threshold, with: 100
         click_on "Submit", :href => merchant_bulk_discounts_path(@merchant1)
       end
     end
