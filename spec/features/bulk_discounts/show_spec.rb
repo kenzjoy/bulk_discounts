@@ -57,6 +57,11 @@ RSpec.describe 'merchants bulk discount show page', type: :feature do
         expect(page).to have_content("If the quantity of an item ordered meets or exceeds the quantity threshold, then the percentage discount should apply to that item only. Other items that did not meet the quantity threshold will not be affected.")
         expect(page).to have_content("The quantities of multiple unique items ordered cannot be added together to meet the quantity thresholds.")
       end
+
+      it 'has a link to edit the bulk discount. when I click this link, I am 
+      taken to a new page with a form to edit the discount.' do
+        
+      end
     end
   end
 end
